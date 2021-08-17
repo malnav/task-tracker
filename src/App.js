@@ -6,8 +6,6 @@ import About from './components/About'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 
-
-
 import { useState, useEffect } from "react"
 
 function App() {
@@ -90,7 +88,7 @@ const deleteTask = async (id) => {
     <div className="container">
     <Header onClickAddButton={() => setShowAddTask(!showAddTask)} showAdd={showAddTask} title="Task Tracker" />
     
-    <Route path='/' exact render={(props) => (
+    <Route path='/task-tracker' exact render={(props) => (
         <>
           {showAddTask && <AddTask onAdd={addTask}/>}
           

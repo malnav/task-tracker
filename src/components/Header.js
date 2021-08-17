@@ -12,7 +12,7 @@ const Header = ({title, showAdd, onClickAddButton}) => {
                 {title}
             </h2> 
             {
-                (location.pathname === '/') && <Button onClick={onClickAddButton} color={showAdd ? "red" : "green"} text={showAdd ? "Close" : "Add"}  />
+                (location.pathname === '/task-tracker') && <Button onClick={onClickAddButton} color={showAdd ? "red" : "green"} text={showAdd ? "Close" : "Add"}  />
             }
         </header>
     )
