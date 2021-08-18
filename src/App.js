@@ -8,6 +8,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import { useState, useEffect } from "react"
 
+
+const { REACT_APP_API_URL_TASK } = process.env;
+
 function App() {
 
   const [showAddTask,setShowAddTask] = useState (false)
@@ -19,19 +22,22 @@ useEffect(() => {
     const tasksfromServer = await fetchTasks()
     setTasks(tasksfromServer)
   }
+  console.log(REACT_APP_API_URL_TASK)
   getTasks()
 }, [])
 
 // Fetch data
 const fetchTasks = async () => {
-  const res = await fetch('https://my-json-server.typicode.com/malnav/json-fake-server/db/tasks')
+  const res = await fetch(REACT_APP_API_URL_TASK)
+  
   const data = await res.json()
 
   return data 
 }
 
 const fetchTask = async (id) => {
-  const res = await fetch(`https://my-json-server.typicode.com/malnav/json-fake-server/db/tasks/${id}`)
+  const res = await fetch(REACT_APP_API_URL_TASK+`/${id}`)
+  console.log(REACT_APP_API_URL_TASK+`/${id}`)
   const data = await res.json()
   return data 
 }
@@ -42,15 +48,16 @@ const addTask = async (task) => {
   //const id = Math.floor(Math.random() * 1000) +1
   //const newTask = {id,...task}
 
-  const res = await fetch('https://my-json-server.typicode.com/malnav/json-fake-server/db/tasks', {
+  const res = await fetch(REACT_APP_API_URL_TASK, {
     method: 'POST',
     headers: {'content-Type': 'application/json'},
     body: JSON.stringify(task),
   })
 
   const data = await res.json()
-
+  
   setTasks([...tasks,data])
+  console.log(data)
 }
 
 //toggle reminder
@@ -58,7 +65,7 @@ const toggleReminder = async (id) => {
   const taskToggle = await fetchTask(id)
   const updateTask =  {...taskToggle,reminder: !taskToggle.reminder}
 
-  const res = await fetch(`https://my-json-server.typicode.com/malnav/json-fake-server/db/tasks/${id}`, {
+  const res = await fetch(REACT_APP_API_URL_TASK+`/${id}`, {
     method: 'PUT',
     headers: {'content-Type': 'application/json'},
     body: JSON.stringify(updateTask)
@@ -73,7 +80,7 @@ const toggleReminder = async (id) => {
 
 //delete task
 const deleteTask = async (id) => {
-  await fetch(`https://my-json-server.typicode.com/malnav/json-fake-server/db/tasks/${id}`, {
+  await fetch(REACT_APP_API_URL_TASK+`/${id}`, {
     method: 'DELETE'
   })
   
