@@ -93,10 +93,12 @@ const deleteTask = async (id) => {
 
     <Router>
     <div className="container">
-    <Header onClickAddButton={() => setShowAddTask(!showAddTask)} showAdd={showAddTask} title="Task Tracker" />
+    
     
     <Route path='/task-tracker' exact render={(props) => (
+        
         <>
+          <Header onClickAddButton={() => setShowAddTask(!showAddTask)} showAdd={showAddTask} title="Task Tracker" />
           {showAddTask && <AddTask onAdd={addTask}/>}
           
           {
