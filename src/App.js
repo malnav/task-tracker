@@ -24,14 +24,14 @@ useEffect(() => {
 
 // Fetch data
 const fetchTasks = async () => {
-  const res = await fetch('http://localhost:4000/tasks')
+  const res = await fetch('https://my-json-server.typicode.com/malnav/json-fake-server/db/tasks')
   const data = await res.json()
 
   return data 
 }
 
 const fetchTask = async (id) => {
-  const res = await fetch(`http://localhost:4000/tasks/${id}`)
+  const res = await fetch(`https://my-json-server.typicode.com/malnav/json-fake-server/db/tasks/${id}`)
   const data = await res.json()
   return data 
 }
@@ -42,7 +42,7 @@ const addTask = async (task) => {
   //const id = Math.floor(Math.random() * 1000) +1
   //const newTask = {id,...task}
 
-  const res = await fetch('http://localhost:4000/tasks', {
+  const res = await fetch('https://my-json-server.typicode.com/malnav/json-fake-server/db/tasks', {
     method: 'POST',
     headers: {'content-Type': 'application/json'},
     body: JSON.stringify(task),
@@ -58,7 +58,7 @@ const toggleReminder = async (id) => {
   const taskToggle = await fetchTask(id)
   const updateTask =  {...taskToggle,reminder: !taskToggle.reminder}
 
-  const res = await fetch(`http://localhost:4000/tasks/${id}`, {
+  const res = await fetch(`https://my-json-server.typicode.com/malnav/json-fake-server/db/tasks/${id}`, {
     method: 'PUT',
     headers: {'content-Type': 'application/json'},
     body: JSON.stringify(updateTask)
@@ -73,7 +73,7 @@ const toggleReminder = async (id) => {
 
 //delete task
 const deleteTask = async (id) => {
-  await fetch(`http://localhost:4000/tasks/${id}`, {
+  await fetch(`https://my-json-server.typicode.com/malnav/json-fake-server/db/tasks/${id}`, {
     method: 'DELETE'
   })
   
